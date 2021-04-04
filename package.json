@@ -1,0 +1,22 @@
+{
+  "name": "pernstack",
+  "version": "1.0.0",
+  "description": "pern",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pkzone",
+  "license": "MIT",
+  "dependencies": {
+    "@ethersproject/address": "^5.1.0",
+    "@ethersproject/contracts": "^5.1.0",
+    "@ethersproject/providers": "^5.1.0",
+    "@ethersproject/solidity": "^5.1.0",
+    "@uniswap/sdk": "^3.0.3",
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "pg": "^8.5.1"
+  }
+}

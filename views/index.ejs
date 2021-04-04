@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Todo</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+form{
+width:30%;
+margin:auto;
+text-align:center;
+}
+
+form input[type="text"]{
+margin:4px 0px;
+background:transparent;
+color:#333;
+border:1px solid #333;
+padding:10px 10px;
+}
+
+form input[type='submit']{
+background:transparent;
+color:#333;
+border:1px solid #333;
+padding:10px 20px;
+cursor:pointer;
+}
+form input[type='submit']:hover{
+background:#333;
+color:#fff;
+}
+
+
+.contents{
+display:flex;
+flex-direction:column;
+align-items:center;
+width:30%;
+margin:auto;
+}
+
+ul li{
+padding:10px;
+text-align:left;
+}
+
+ul li a{
+padding:1px 5px;
+color:red;
+}
+
+
+
+</style>
+
+</head>
+<body>
+
+<form method="post" action="">
+<input type="text" name="task" placeholder="Task"><br>
+<input type="text" name="detail" placeholder="Detail"><br>
+<input type="submit" name="create" value="Create">
+</form>
+
+<div class="contents">
+<h3>We have total <%= todos.length %> items.</h3>
+<ul style="list-style-type:number;">
+
+
+<%if (todos.length > 0){ %>
+<% todos.forEach(function(data){ %>
+
+<li><strong><%= data.task %></strong> :
+<small> <%= data.detail %> </small>
+<a name="<%= data.id %>" href="/<%= data.id %>"><i class="fa fa-trash"></i></a>
+
+</li>
+
+<% })}else{ %>
+
+<tr> No records found</tr>
+
+<% } %>
+</ul>
+</div>
+
+</body>
+</html>
