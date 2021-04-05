@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 
-form{
+.postform form{
 width:30%;
 margin:auto;
 text-align:center;
@@ -29,6 +29,7 @@ cursor:pointer;
 form input[type='submit']:hover{
 background:#333;
 color:#fff;
+font-weight:bold;
 }
 
 
@@ -50,19 +51,40 @@ padding:1px 5px;
 color:red;
 }
 
+/* edit */
+
+.edit{
+padding:10%;
+margin:auto;
+}
+
+.edit form{
+display:flex;
+flex-direction:column;
+}
+
+.edittask{
+display:none;
+position:fixed;
+right:0;
+top:0;
+bottom:0;
+background:red;
+width:30%;
+}
 
 
 </style>
 
 </head>
 <body>
-
+<div class="postform">
 <form method="post" action="">
 <input type="text" name="task" placeholder="Task"><br>
 <input type="text" name="detail" placeholder="Detail"><br>
 <input type="submit" name="create" value="Create">
 </form>
-
+</div>
 <div class="contents">
 <h3>We have total <%= todos.length %> items.</h3>
 <ul style="list-style-type:number;">
@@ -73,7 +95,8 @@ color:red;
 
 <li><strong><%= data.task %></strong> :
 <small> <%= data.detail %> </small>
-<a name="<%= data.id %>" href="/<%= data.id %>"><i class="fa fa-trash"></i></a>
+<a href="#" id="edit" name="<%= data.id %>" class="fa fa-pencil"></a>
+<a href="/<%= data.id %>" class="fa fa-trash"></a>
 
 </li>
 
@@ -85,5 +108,31 @@ color:red;
 </ul>
 </div>
 
+<div class="edittask">
+<div class="edit">
+<form method="post" action="/update">
+<input type="hidden" name="id" id="tid" value=''>
+<input type="text" name="tsk" id="tt"><br>
+<input type="text" name="dtail" id="td"><br>
+<input type="submit" value="Update" name="update">
+</form>
+</div>
+</div>
+<script>
+var el = document.querySelectorAll('#edit');
+var takui = document.querySelector('.edittask');
+el.forEach((e)=>{
+e.onclick = (e)=>{
+console.log(e.target.name);
+document.getElementById('tid').value = e.target.name;
+document.getElementById('tt').value= e.target.parentElement.children[0].textContent;
+document.getElementById('td').value= e.target.parentElement.children[1].textContent;
+takui.style.display = "block";
+}
+
+});
+
+
+</script>
 </body>
 </html>

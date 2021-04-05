@@ -16,12 +16,13 @@ app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 
 app.get('/', (req, res) => {
-pool.query('SELECT * FROM todos',  (err, result) => {
+pool.query('SELECT * FROM todos ORDER BY id ASC',  (err, result) => {
   if (err) throw err;
   //console.log(result.rows)
   res.render('index', {todos: result.rows  });
 })
 });
+
 
 app.post('/', urlencodedParser, (req, res) => {
 //console.log(req.body);
@@ -32,6 +33,7 @@ pool.query("INSERT INTO todos(task, detail) VALUES($1, $2)", [req.body.task, req
   } 
 })
 })
+
 
 
 //Send delete request
@@ -48,6 +50,22 @@ console.log(result);
  
 })
 })
+
+//send update requests
+
+app.post('/update', urlencodedParser, (req, res)=>{
+res.redirect('/');
+//res.send(req.body);
+pool.query("UPDATE todos SET task = $1, detail = $2 WHERE id = $3", [req.body.tsk, req.body.dtail, req.body.id], (error, result)=>{
+if(error){
+console.log(error);
+}else{
+console.log(result);
+}
+})
+
+
+});
 
 
 const port = 3000;
